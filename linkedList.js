@@ -73,8 +73,10 @@ function linkedListGenerator() {
   }
   function insert(value, number) {
     var current;
-    if (nodeCount === number) {
-      add(value);
+    if (nodeCount <= number) {
+      return false;
+    } else if (number < 0) {
+      return false;
     } else if (number == 0) {
       current = createNode(value);
       current.next = head;
