@@ -4,12 +4,14 @@
  * @return {Object} an object exposing methods to be used to manipulate a linked list
  */
 
-// var eyes = require('eyes');
+var eyes = require('eyes');
 
 function linkedListGenerator() {
   var head = null;
   var last = null;
   var nodeCount = 0;
+  var currentNode;
+  var thingy = true;
 
   function createNode(val) {
     nodeCount++;
@@ -30,6 +32,8 @@ function linkedListGenerator() {
     if (getTail() === null) {
       head = newNode;
       last = newNode;
+      currentNode = newNode;
+
     } else {
       last.next = newNode;
       last = newNode;
@@ -49,7 +53,6 @@ function linkedListGenerator() {
 
   }
   function remove(number) {
-
     if (nodeCount <= number ) {
       return false;
     } else if (number === 0) {
@@ -99,6 +102,31 @@ function linkedListGenerator() {
     return nodeCount;
   }
 
+  function hasNext() {
+    if (currentNode !== getTail()) {
+      return true;
+    } else if (thingy) {
+      thingy = false;
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function next() {
+    if (thingy) {
+      var previousNode = currentNode;
+      currentNode = currentNode.next;
+      return previousNode.value;
+    } else {
+      return currentNode.value;
+    }
+  }
+
+  function current () {
+    return current.value;
+  }
+
   return {
     getHead : getHead,
     getTail : getTail,
@@ -106,21 +134,24 @@ function linkedListGenerator() {
     get : get,
     remove : remove,
     insert : insert,
-    nCount : nCount
+    nCount : nCount,
+    hasNext : hasNext,
+    next : next,
+    current : current
+
   };
 }
 
+var ll = linkedListGenerator();
+ll.add('ant');
+ll.add('bat');
+ll.add('cat');
+ll.add('dog');
+ll.add('elephant');
+ll.add('fish');
+ll.add('giraffe');
+ll.add('hippo');
 
-// var ll = linkedListGenerator();
-// ll.add(0);
-// ll.add(1);
-// ll.add(2);
-// ll.add(3);
-// ll.add(4);
-// ll.add(5);
-// ll.add(6);
-
-// eyes.inspect(ll.insert(7, 0));
-// eyes.inspect(ll.nCount());
-// eyes.inspect(ll.getHead());
-
+while (ll.hasNext()) {
+  eyes.inspect('ll.next()', ll.next());
+}
