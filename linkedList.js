@@ -4,13 +4,13 @@
  * @return {Object} an object exposing methods to be used to manipulate a linked list
  */
 
-var eyes = require('eyes');
+// var eyes = require('eyes');
 
 function linkedListGenerator() {
   var head = null;
   var last = null;
   var nodeCount = 0;
-  var currentNode;
+  var currentN;
   var thingy = true;
 
   function createNode(val) {
@@ -80,7 +80,7 @@ function linkedListGenerator() {
       return false;
     } else if (number < 0) {
       return false;
-    } else if (number == 0) {
+    } else if (number === 0) {
       current = createNode(value);
       current.next = head;
       head = current;
@@ -103,7 +103,7 @@ function linkedListGenerator() {
   }
 
   function hasNext() {
-    if (currentNode !== getTail()) {
+    if (currentN !== getTail()) {
       return true;
     } else if (thingy) {
       thingy = false;
@@ -115,11 +115,11 @@ function linkedListGenerator() {
 
   function next() {
     if (thingy) {
-      var previousNode = currentNode;
-      currentNode = currentNode.next;
+      var previousNode = currentN;
+      currentN = currentN.next;
       return previousNode.value;
     } else {
-      return currentNode.value;
+      return currentN.value;
     }
   }
 
@@ -142,16 +142,16 @@ function linkedListGenerator() {
   };
 }
 
-var ll = linkedListGenerator();
-ll.add('ant');
-ll.add('bat');
-ll.add('cat');
-ll.add('dog');
-ll.add('elephant');
-ll.add('fish');
-ll.add('giraffe');
-ll.add('hippo');
+// var ll = linkedListGenerator();
+// ll.add('ant');
+// ll.add('bat');
+// ll.add('cat');
+// ll.add('dog');
+// ll.add('elephant');
+// ll.add('fish');
+// ll.add('giraffe');
+// ll.add('hippo');
 
-while (ll.hasNext()) {
-  eyes.inspect('ll.next()', ll.next());
-}
+// while (ll.hasNext()) {
+//   eyes.inspect('ll.next()', ll.next());
+// }
